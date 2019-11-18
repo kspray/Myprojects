@@ -4,7 +4,7 @@ except Exception as e:
     print("Warning: OpenCV not installed. To use motion detection, make sure you've properly configured OpenCV.")
 
 import time
-import thread
+import _thread
 import threading
 import atexit
 import sys
@@ -116,7 +116,22 @@ class VideoUtils(object):
             if not grabbed:
                 break
 
-            # resize the frame, convert it to grayscale, and blur it
+            # resizmport RPi.GPIO as GPIO
+
+# from Adafruit_MotorHAT import Adafruit_MotorHAT, Adafruit_DCMotor, Adafruit_S$
+
+
+from adafruit_motor import stepper as STEPPER
+from adafruit_motorkit import MotorKit
+
+# create a default object, no changes to I2C address or frequency
+kit = MotorKit()
+
+# recommended for auto-disabling motors on shutdown!
+
+
+# atexit.register(turnOffMotors)
+e the frame, convert it to grayscale, and blur it
             frame = imutils.resize(frame, width=500)
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
             gray = cv2.GaussianBlur(gray, (21, 21), 0)
