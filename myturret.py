@@ -242,10 +242,10 @@ class Turret(object):
                         if MOTOR_X_REVERSED:
                             Turret.move_backward(kit.stepper1, 5)
                         else:
-                            Turret.move_forward(kit.stepper1_x, 5)
+                            Turret.move_forward(kit.stepper1, 5)
                     elif ch == "d":
                         if MOTOR_X_REVERSED:
-                            Turret.move_forward(kit.stepper1_x, 5)
+                            Turret.move_forward(kit.stepper1, 5)
                         else:
                             Turret.move_backward(kit.stepper1 5)
                     elif ch == "\n":
