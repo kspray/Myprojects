@@ -116,22 +116,7 @@ class VideoUtils(object):
             if not grabbed:
                 break
 
-            # resizmport RPi.GPIO as GPIO
-
-# from Adafruit_MotorHAT import Adafruit_MotorHAT, Adafruit_DCMotor, Adafruit_S$
-
-
-from adafruit_motor import stepper as STEPPER
-from adafruit_motorkit import MotorKit
-
-# create a default object, no changes to I2C address or frequency
-kit = MotorKit()
-
-# recommended for auto-disabling motors on shutdown!
-
-
-# atexit.register(turnOffMotors)
-e the frame, convert it to grayscale, and blur it
+        #resize the frame, convert it to grayscale, and blur it
             frame = imutils.resize(frame, width=500)
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
             gray = cv2.GaussianBlur(gray, (21, 21), 0)
@@ -212,12 +197,12 @@ class Turret(object):
        # atexit.register(self.__turn_off_motors)
 
         # Stepper motor 1 X Motor
-        kit.stepper1.onestep(direction=stepper.BACKWARD, style=stepper.DOUBLE)
+        kit.stepper1.onestep(direction=STEPPER.BACKWARD, style=STEPPER.DOUBLE)
         # self.sm_x = self.mh.getStepper(200, 1)      # 200 steps/rev, motor port #1
         # self.current_x_steps = 0
 
         # Stepper motor 2 Y Motor
-        kit.stepper2.onestep(direction=stepper.BACKWARD, style=stepper.DOUBLE)
+        kit.stepper2.onestep(direction=STEPPER.BACKWARD, style=STEPPER.DOUBLE)
         # self.sm_y = self.mh.getStepper(200, 2)      # 200 steps/rev, motor port #2               # 5 RPM
         # self.current_y_steps = 0
         
@@ -262,7 +247,7 @@ class Turret(object):
                         if MOTOR_X_REVERSED:
                             Turret.move_forward(kit.stepper1, 5)
                         else:
-                            Turret.move_backward(kit.stepper1 5)
+                            Turret.move_backward(kit.stepper1, 5)
                     elif ch == "\n":
                         break
 
@@ -371,7 +356,7 @@ class Turret(object):
         Turret.move_forward(kit.stepper1, 1)
         Turret.move_forward(kit.stepper2, 1)
 
-        print ("Commands: Pivot with (a) and (d). Tilt with (w) and (s). Exit with (q)\n")
+        print ('Commands: Pivot with (a) and (d). Tilt with (w) and (s). Exit with (q)\n')
         with raw_mode(sys.stdin):
             try:
                 while True:
@@ -420,7 +405,7 @@ class Turret(object):
         :return:
         """
         #motor.step(steps, Adafruit_MotorHAT.FORWARD,  Adafruit_MotorHAT.INTERLEAVE)
-        kit.stepper1.onestep(direction=stepper.FORWARD, style=stepper.INTERLEAVE)
+        kit.stepper1.onestep(direction=STEPPER.FORWARD, style=STEPPER.INTERLEAVE)
 
     @staticmethod
     def move_backward(motor, steps):
@@ -431,7 +416,7 @@ class Turret(object):
         :return:
         """
         #motor.step(steps, Adafruit_MotorHAT.BACKWARD, Adafruit_MotorHAT.INTERLEAVE)
-        kit.stepper1.onestep(direction=stepper.BACKWARD, style=stepper.INTERLEAVE)
+        kit.stepper1.onestep(direction=STEPPER.BACKWARD, style=STEPPER.INTERLEAVE)
 
     def __turn_off_motors(self):
         """
