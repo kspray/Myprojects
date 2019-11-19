@@ -403,7 +403,8 @@ class Turret(object):
         :return:
         """
         #motor.step(steps, Adafruit_MotorHAT.FORWARD,  Adafruit_MotorHAT.INTERLEAVE)
-        kit.stepper1.onestep(direction=STEPPER.FORWARD, style=STEPPER.INTERLEAVE)
+        for i in range(steps):
+        motor.onestep(direction=STEPPER.FORWARD, style=STEPPER.INTERLEAVE)
 
     @staticmethod
     def move_backward(motor, steps):
@@ -414,7 +415,8 @@ class Turret(object):
         :return:
         """
         #motor.step(steps, Adafruit_MotorHAT.BACKWARD, Adafruit_MotorHAT.INTERLEAVE)
-        kit.stepper1.onestep(direction=STEPPER.BACKWARD, style=STEPPER.INTERLEAVE)
+        for i in range(steps):
+        motor.onestep(direction=STEPPER.BACKWARD, style=STEPPER.INTERLEAVE)
 
     def __turn_off_motors(self):
         """
